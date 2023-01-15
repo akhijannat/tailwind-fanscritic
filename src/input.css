@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .bg-dark-gradient {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.001) 0, #000 180%);
+    bottom: 0;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    display: flex;
+    flex-direction: column;
+    height: 4rem;
+    justify-content: flex-end;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+  }
+
+  .active-sort {
+    @apply bg-white p-1.5 lg:pl-2.5 lg:pr-3.5 rounded-md flex items-center
+           text-sm text-gray-600 font-medium;
+  }
+  .inactive-sort {
+    @apply p-1.5 lg:pl-2.5 lg:pr-3.5 rounded-md flex items-center 
+           text-sm text-gray-600 font-medium;
+  }
+}

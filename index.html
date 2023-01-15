@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fanscritic</title>
+
+    <!-- Css Link -->
+    <link rel="stylesheet" href="dist/output.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.2/dist/css/splide.min.css"
+    />
+  </head>
+
+  <body>
+    <nav
+      class="bg-white border-b border-gray-300 shadow-sm w-full fixed top-0 z-[9998]"
+    >
+      <div class="px-2 py-2 mx-auto md:max-w-4xl">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <!-- Nav logo -->
+            <div class="md:mx-6">
+              <a href="index.html">
+                <img class="w-36" src="img/logo.png" />
+              </a>
+            </div>
+            <!-- Menu Items -->
+            <ul
+              class="hidden font-bold text-[.875rem] leading-[1.25rem] text-gray-700 sm:flex uppercase"
+            >
+              <a href="index.html">
+                <li class="sm:px-2 px-0.5 py-2 rounded hover:bg-gray-200">
+                  Profiles
+                </li>
+              </a>
+              <a href="reviews.html">
+                <li class="sm:px-2 px-0.5 py-2 rounded hover:bg-gray-200">
+                  Reviews
+                </li>
+              </a>
+              <a href="#">
+                <li class="sm:px-2 px-0.5 py-2 rounded hover:bg-gray-200">
+                  Categories
+                </li>
+              </a>
+              <a href="">
+                <li class="sm:px-2 px-0.5 py-2 rounded hover:bg-gray-200">
+                  Meet Now
+                </li>
+              </a>
+              <a href="">
+                <li class="sm:px-2 px-0.5 pt-2 pb-2 rounded hover:bg-gray-200">
+                  Blog
+                </li>
+              </a>
+            </ul>
+          </div>
+          <!-- Menu buttons -->
+          <ul class="flex items-center">
+            <a href="#">
+              <li class="bg-[#fe492d] w-8 h-8 mx-auto ml-1 p-2 rounded-full">
+                <img class="" src="img/submit.svg" alt="" />
+              </li>
+            </a>
+            <li class="ml-1 cursor-pointer">
+              <img
+                class="w-7 toggle-search-button"
+                src="img/search.svg"
+                alt=""
+              />
+            </li>
+            <li class="cursor-pointer">
+              <img
+                id="toggle-menu-button"
+                class="ml-1.5 w-7"
+                src="img/menu.svg"
+                alt=""
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- search popup -->
+    <div
+      class="bg-white fixed top-0 inset-x-0 h-screen z-[9999] hidden sm:px-0 toggle-search"
+    >
+      <div class="py-2 border-b">
+        <div class="max-w-lg mx-auto">
+          <form action="">
+            <input
+              type="text"
+              class="w-full px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none"
+              placeholder="Search..."
+            />
+          </form>
+
+          <button
+            class="absolute p-2 border rounded-md right-2 top-2 close-search"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M2.87321 18.8451C2.24311 19.4753 2.24311 20.4969 2.87321 21.127C3.50332 21.7571 4.52493 21.7571 5.15504 21.127L12.0002 14.2818L18.8457 21.1273C19.4759 21.7574 20.4975 21.7574 21.1276 21.1273C21.7577 20.4972 21.7577 19.4756 21.1276 18.8455L14.282 12L21.1278 5.15429C21.7579 4.52419 21.7579 3.50258 21.1278 2.87248C20.4977 2.24238 19.4761 2.24238 18.846 2.87248L12.0002 9.71822L5.1548 2.87286C4.52469 2.24275 3.50308 2.24275 2.87297 2.87286C2.24286 3.50296 2.24286 4.52456 2.87297 5.15466L9.71838 12L2.87321 18.8451Z"
+                fill="#15171A"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu popup -->
+    <div
+      class="fixed inset-0 h-screen pb-2 overflow-y-auto bg-white z-[9999] hidden"
+      id="toggle-menu"
+    >
+      <div class="p-2 border-b">
+        <p
+          class="max-w-lg p-1.5 text-base font-bold text-center uppercase sm:mx-auto"
+        >
+          Menu
+        </p>
+        <button
+          class="absolute p-2 border rounded-md right-2 top-2"
+          id="close-menu"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M2.87321 18.8451C2.24311 19.4753 2.24311 20.4969 2.87321 21.127C3.50332 21.7571 4.52493 21.7571 5.15504 21.127L12.0002 14.2818L18.8457 21.1273C19.4759 21.7574 20.4975 21.7574 21.1276 21.1273C21.7577 20.4972 21.7577 19.4756 21.1276 18.8455L14.282 12L21.1278 5.15429C21.7579 4.52419 21.7579 3.50258 21.1278 2.87248C20.4977 2.24238 19.4761 2.24238 18.846 2.87248L12.0002 9.71822L5.1548 2.87286C4.52469 2.24275 3.50308 2.24275 2.87297 2.87286C2.24286 3.50296 2.24286 4.52456 2.87297 5.15466L9.71838 12L2.87321 18.8451Z"
+              fill="#15171A"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <div id="open" class="max-w-lg mt-2 mx-auto sm:px-0 px-1.5">
+        <div
+          class="flex items-center justify-between px-2 space-x-4 font-bold text-center text-gray-600"
+        >
+          <a
+            href="#"
+            class="flex items-center justify-center w-full px-1 py-2 text-sm font-bold text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm gap-x-1 hover:bg-gray-50"
+          >
+            Sign up
+          </a>
+          <a
+            href="#"
+            class="flex items-center justify-center w-full px-1 py-2 text-sm font-bold text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm gap-x-1 hover:bg-gray-50"
+          >
+            Sign in
+          </a>
+        </div>
+
+        <div class="py-2">
+          <span class="pl-2 font-bold text-gray-400 uppercase">Menu</span>
+          <div class="font-bold text-gray-700 uppercase">
+            <a
+              href="#"
+              class="flex items-center p-2 rounded gap-x-2 hover:bg-gray-200"
+            >
+              <span>Models</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center p-2 rounded gap-x-2 hover:bg-gray-200"
+            >
+              <span>Reviews</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center p-2 rounded gap-x-2 hover:bg-gray-200"
+            >
+              <span>Tags</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center p-2 rounded gap-x-2 hover:bg-gray-200"
+            >
+              <span>Meet Now</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter popup -->
+    <div
+      class="fixed top-0 inset-x-0 z-[9999] h-screen pb-2 bg-white hidden filter"
+    >
+      <div class="p-2 border-b">
+        <div class="relative max-w-lg mx-auto">
+          <span
+            class="absolute text-lg font-semibold text-gray-900 underline cursor-pointer left-1 top-1"
+          >
+            Reset
+          </span>
+          <h2
+            class="max-w-lg p-1.5 text-base font-bold text-center uppercase sm:mx-auto"
+          >
+            Filter by
+          </h2>
+        </div>
+        <button
+          class="absolute p-2 border rounded-md right-2 top-2 close-filter"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M2.87321 18.8451C2.24311 19.4753 2.24311 20.4969 2.87321 21.127C3.50332 21.7571 4.52493 21.7571 5.15504 21.127L12.0002 14.2818L18.8457 21.1273C19.4759 21.7574 20.4975 21.7574 21.1276 21.1273C21.7577 20.4972 21.7577 19.4756 21.1276 18.8455L14.282 12L21.1278 5.15429C21.7579 4.52419 21.7579 3.50258 21.1278 2.87248C20.4977 2.24238 19.4761 2.24238 18.846 2.87248L12.0002 9.71822L5.1548 2.87286C4.52469 2.24275 3.50308 2.24275 2.87297 2.87286C2.24286 3.50296 2.24286 4.52456 2.87297 5.15466L9.71838 12L2.87321 18.8451Z"
+              fill="#15171A"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <form action="" class="space-y-3">
+        <div class="max-w-lg mx-auto mb-28">
+          <div class="text-sm font-bold text-gray-800 uppercase">
+            <div class="px-2 space-y-2">
+              <h2 class="pt-2 pb-0">Apps</h2>
+              <div class="flex flex-wrap">
+                <label
+                  class="px-3 py-2 mb-2 mr-2 border rounded-md shadow-sm cursor-pointer hover:bg-gray-50"
+                >
+                  <input
+                    type="radio"
+                    name="filter"
+                    class="ml-1 text-black focus:ring-0"
+                  />
+                  All
+                </label>
+                <label
+                  class="px-3 py-2 mb-2 mr-2 border rounded-md shadow-sm cursor-pointer hover:bg-gray-50"
+                >
+                  <input
+                    type="radio"
+                    name="filter"
+                    class="ml-1 text-black focus:ring-0"
+                  />
+                  AVNStars
+                </label>
+                <label
+                  class="px-3 py-2 mb-2 mr-2 border rounded-md shadow-sm cursor-pointer hover:bg-gray-50"
+                >
+                  <input
+                    type="radio"
+                    name="filter"
+                    class="ml-1 text-black focus:ring-0"
+                  />
+                  JustForFans
+                </label>
+                <label
+                  class="px-3 py-2 mb-2 mr-2 border rounded-md shadow-sm cursor-pointer hover:bg-gray-50"
+                >
+                  <input
+                    type="radio"
+                    name="filter"
+                    class="ml-1 text-black focus:ring-0"
+                  />
+                  MYM
+                </label>
+                <label
+                  class="px-3 py-2 mb-2 mr-2 border rounded-md shadow-sm cursor-pointer hover:bg-gray-50"
+                >
+                  <input
+                    type="radio"
+                    name="filter"
+                    class="ml-1 text-black focus:ring-0"
+                  />
+                  ONLYFANS
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fixed inset-x-0 bottom-0 py-2 bg-white border-t">
+          <div class="max-w-lg px-2 mx-auto">
+            <div class="text-center">
+              <button
+                class="w-full px-4 py-3 font-bold text-white rounded-md shadow-sm bg-[#fe492d] hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+              >
+                Show results
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Body Section -->
+    <section class="max-w-lg mx-auto sm:px-0 px-1.5 sm:mt-16">
+      <!-- Create model profile -->
+      <div class="sm:px-0">
+        <div
+          class="w-full px-4 py-2 mb-2 text-center text-white rounded-md bg-[#fe492d]"
+        >
+          Create your model profile and get reviews!
+          <a href="#" class="font-bold">Click here →</a>
+        </div>
+      </div>
+
+      <!-- Search Input -->
+      <div class="sm:px-0" id="search-input">
+        <input
+          type="text"
+          class="w-full px-4 py-2 mb-2 bg-white border border-gray-300 rounded-md focus:outline-none"
+          placeholder="Search..."
+        />
+      </div>
+
+      <!-- Filters and toggle button -->
+      <div class="flex items-center justify-between">
+        <div class="border rounded-md shadow-sm hover:bg-gray-50 toggle-filter">
+          <button
+            class="flex items-center space-x-0.5 sm:space-x-2 sm:p-2 p-1.5 font-medium"
+          >
+            <img class="w-5" src="img/filter.svg" alt="" />
+            <div class="flex flex-col pr-1 text-center">
+              <span class="font-bold text-left text-gray-700 uppercase"
+                >Filters</span
+              >
+            </div>
+            <img class="w-2" src="img/carret-down.svg" alt="" />
+          </button>
+        </div>
+
+        <!-- Toggle Button -->
+        <div class="p-0.5 rounded-lg flex bg-gray-100 hover:bg-gray-200">
+          <a href="#" class="active-sort" id="active-top">
+            <img class="w-4 mr-1" src="img/trending.svg" />
+            <span
+              class="font-bold text-gray-600 uppercase sr-only lg:not-sr-only group-hover:text-gray-900"
+            >
+              top
+            </span>
+          </a>
+          <a href="#" type="button" class="inactive-sort" id="active-new">
+            <img class="w-4 mr-1" src="img/new.svg" />
+            <span
+              class="font-bold text-gray-600 uppercase sr-only group-hover:text-gray-900 lg:not-sr-only"
+            >
+              New
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Top Slider -->
+      <div class="my-2.5 -mx-2 sm:mx-0 splide" id="slider1">
+        <div class="splide__track">
+          <ul class="splide__list space-x-1 text-[#0763f7]">
+            <li
+              class="splide__slide py-1 px-2 leading-none text-center bg-[#bfdbfe] rounded-full tracking-tight hover:bg-[#3b82f6] hover:text-white leading-none"
+              t
+              pb-121.5
+            >
+              <a href="#" class="">Pronstar</a>
+            </li>
+            <li
+              class="splide__slide py-1 px-2 leading-none text-center bg-[#bfdbfe] rounded-full tracking-tight hover:bg-[#3b82f6] hover:text-white leading-none"
+              t
+              pb-121.5
+            >
+              <a href="#" class="">Pronstar</a>
+            </li>
+            <li
+              class="splide__slide py-1 px-2 leading-none text-center bg-[#bfdbfe] rounded-full tracking-tight hover:bg-[#3b82f6] hover:text-white leading-none"
+              t
+              pb-121.5
+            >
+              <a href="#" class="">Pronstar</a>
+            </li>
+            <li
+              class="splide__slide py-1 px-2 leading-none text-center bg-[#bfdbfe] rounded-full tracking-tight hover:bg-[#3b82f6] hover:text-white leading-none"
+              t
+              pb-1
+              2
+              1.5
+            >
+              <a href="#" class="">Pronstar</a>
+            </li>
+            <li
+              class="splide__slide py-1 px-2 leading-none text-center bg-[#bfdbfe] rounded-full tracking-tight hover:bg-[#3b82f6] hover:text-white leading-none"
+              t
+              pb-1
+              2
+              1.5
+            >
+              <a href="#" class="">Pronstar</a>
+            </li>
+            <li
+              class="splide__slide py-1 px-2 leading-none text-center bg-[#bfdbfe] rounded-full tracking-tight hover:bg-[#3b82f6] hover:text-white leading-none"
+              t
+              pb-1
+              2
+              1.5
+            >
+              <a href="#" class="">Pronstar</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Description and read more -->
+      <div class="mt-3 sm:px-0 px-1.5">
+        <div
+          class="flex flex-row items-center justify-between mb-2 font-bold text-gray-900 uppercase"
+        >
+          <h1>PREMIUM GIRL ACCOUNTS WITH REVIEWS</h1>
+          <span
+            class="inline px-2 text-xs font-semibold bg-gray-100 rounded-full"
+            >2269</span
+          >
+        </div>
+        <div class="mb-3">
+          <div
+            class="relative overflow-hidden leading-5 text-justify text-gray-900"
+          >
+            <p class="inline">
+              Discover premium girls accounts with reviews. Discover premium
+              girls accounts with reviews. Discover premium girls accounts with
+              reviews. Discover premium girls accounts with reviews.
+
+              <span
+                class="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white to-transparent"
+                id="showMoreBg"
+              ></span>
+            </p>
+            <p class="hidden" id="more">
+              One female unicorn was especially friendly, and the researchers
+              were able to communicate with the animals. They even named her.
+              Scientists recently discovered the first recorded herd of wild,
+              free-ranging unicorns in Ecuador. The researchers were amazed to
+              see the beautiful creatures, and it was especially surprising that
+              the animals were friendly. Since their discovery, the unicorns
+              have begun to slowly be released back into the wild, though one
+              female is still being kept as a research subject.
+            </p>
+          </div>
+          <div class="mt-3 text-center">
+            <button
+              class="px-10 border rounded-full shadow-sm hover:bg-gray-100"
+              onclick="readMoreBtn()"
+              id="toggle"
+            >
+              Read more
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Section -->
+      <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="relative">
+          <div class="absolute z-10 top-1 left-1">
+            <a
+              href="#"
+              class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+            >
+              Onlyfans
+            </a>
+          </div>
+          <a href="#" class="relative">
+            <div class="">
+              <img class="w-full rounded" src="img/barenakedamy-87.jpg" />
+            </div>
+            <div
+              class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+            >
+              <h2 class="font-bold pb-0.5 text-white">leonelakimt</h2>
+              <ul class="flex gap-x-1">
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+                <li
+                  class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                >
+                  <img class="w-5" src="img/trending-white.svg" />
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Best Account -->
+      <div class="relative pb-4 mt-10 mb-10 border-b">
+        <div class="flex">
+          <img class="w-4 mr-2" src="/img/graph.svg" alt="" />
+          <h2 class="font-bold text-gray-500 uppercase">Best accounts</h2>
+        </div>
+
+        <div class="mt-2">
+          <div class="splide" id="slider2">
+            <div class="splide__track">
+              <ul class="space-x-2 splide__list">
+                <li class="leading-none splide__slide">
+                  <div
+                    class="w-36 mx-0.5 sm:mx-1 font-semibold shadow-sm rounded mb-5"
+                  >
+                    <div class="relative">
+                      <div class="absolute z-10 top-1 left-1">
+                        <a
+                          href="#"
+                          class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+                        >
+                          Onlyfans
+                        </a>
+                      </div>
+                      <a href="#" class="relative">
+                        <div class="">
+                          <img
+                            class="w-full rounded"
+                            src="img/KawaiiCorruptionFree-onlyfans.jpeg"
+                          />
+                        </div>
+                        <div
+                          class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+                        >
+                          <h2 class="font-bold pb-0.5 text-white">
+                            leonelakimt
+                          </h2>
+                          <ul class="flex gap-x-1">
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="leading-none splide__slide">
+                  <div
+                    class="w-36 mx-0.5 sm:mx-1 font-semibold shadow-sm rounded mb-5"
+                  >
+                    <div class="relative">
+                      <div class="absolute z-10 top-1 left-1">
+                        <a
+                          href="#"
+                          class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+                        >
+                          Onlyfans
+                        </a>
+                      </div>
+                      <a href="#" class="relative">
+                        <div class="">
+                          <img
+                            class="w-full rounded"
+                            src="img/KawaiiCorruptionFree-onlyfans.jpeg"
+                          />
+                        </div>
+                        <div
+                          class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+                        >
+                          <h2 class="font-bold pb-0.5 text-white">
+                            leonelakimt
+                          </h2>
+                          <ul class="flex gap-x-1">
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="leading-none splide__slide">
+                  <div
+                    class="w-36 mx-0.5 sm:mx-1 font-semibold shadow-sm rounded mb-5"
+                  >
+                    <div class="relative">
+                      <div class="absolute z-10 top-1 left-1">
+                        <a
+                          href="#"
+                          class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+                        >
+                          Onlyfans
+                        </a>
+                      </div>
+                      <a href="#" class="relative">
+                        <div class="">
+                          <img
+                            class="w-full rounded"
+                            src="img/KawaiiCorruptionFree-onlyfans.jpeg"
+                          />
+                        </div>
+                        <div
+                          class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+                        >
+                          <h2 class="font-bold pb-0.5 text-white">
+                            leonelakimt
+                          </h2>
+                          <ul class="flex gap-x-1">
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="leading-none splide__slide">
+                  <div
+                    class="w-36 mx-0.5 sm:mx-1 font-semibold shadow-sm rounded mb-5"
+                  >
+                    <div class="relative">
+                      <div class="absolute z-10 top-1 left-1">
+                        <a
+                          href="#"
+                          class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+                        >
+                          Onlyfans
+                        </a>
+                      </div>
+                      <a href="#" class="relative">
+                        <div class="">
+                          <img
+                            class="w-full rounded"
+                            src="img/KawaiiCorruptionFree-onlyfans.jpeg"
+                          />
+                        </div>
+                        <div
+                          class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+                        >
+                          <h2 class="font-bold pb-0.5 text-white">
+                            leonelakimt
+                          </h2>
+                          <ul class="flex gap-x-1">
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li class="leading-none splide__slide">
+                  <div
+                    class="w-36 mx-0.5 sm:mx-1 font-semibold shadow-sm rounded mb-5"
+                  >
+                    <div class="relative">
+                      <div class="absolute z-10 top-1 left-1">
+                        <a
+                          href="#"
+                          class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+                        >
+                          Onlyfans
+                        </a>
+                      </div>
+                      <a href="#" class="relative">
+                        <div class="">
+                          <img
+                            class="w-full rounded"
+                            src="img/KawaiiCorruptionFree-onlyfans.jpeg"
+                          />
+                        </div>
+                        <div
+                          class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+                        >
+                          <h2 class="font-bold pb-0.5 text-white">
+                            leonelakimt
+                          </h2>
+                          <ul class="flex gap-x-1">
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="leading-none splide__slide">
+                  <div
+                    class="w-36 mx-0.5 sm:mx-1 font-semibold shadow-sm rounded mb-5"
+                  >
+                    <div class="relative">
+                      <div class="absolute z-10 top-1 left-1">
+                        <a
+                          href="#"
+                          class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+                        >
+                          Onlyfans
+                        </a>
+                      </div>
+                      <a href="#" class="relative">
+                        <div class="">
+                          <img
+                            class="w-full rounded"
+                            src="img/KawaiiCorruptionFree-onlyfans.jpeg"
+                          />
+                        </div>
+                        <div
+                          class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+                        >
+                          <h2 class="font-bold pb-0.5 text-white">
+                            leonelakimt
+                          </h2>
+                          <ul class="flex gap-x-1">
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="leading-none splide__slide">
+                  <div
+                    class="w-36 mx-0.5 sm:mx-1 font-semibold shadow-sm rounded mb-5"
+                  >
+                    <div class="relative">
+                      <div class="absolute z-10 top-1 left-1">
+                        <a
+                          href="#"
+                          class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+                        >
+                          Onlyfans
+                        </a>
+                      </div>
+                      <a href="#" class="relative">
+                        <div class="">
+                          <img
+                            class="w-full rounded"
+                            src="img/KawaiiCorruptionFree-onlyfans.jpeg"
+                          />
+                        </div>
+                        <div
+                          class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+                        >
+                          <h2 class="font-bold pb-0.5 text-white">
+                            leonelakimt
+                          </h2>
+                          <ul class="flex gap-x-1">
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="leading-none splide__slide">
+                  <div
+                    class="w-36 mx-0.5 sm:mx-1 font-semibold shadow-sm rounded mb-5"
+                  >
+                    <div class="relative">
+                      <div class="absolute z-10 top-1 left-1">
+                        <a
+                          href="#"
+                          class="lowercase font-semibold rounded-full px-2 py-0.5 text-white hover:bg-blue-500 bg-blue-400"
+                        >
+                          Onlyfans
+                        </a>
+                      </div>
+                      <a href="#" class="relative">
+                        <div class="">
+                          <img
+                            class="w-full rounded"
+                            src="img/KawaiiCorruptionFree-onlyfans.jpeg"
+                          />
+                        </div>
+                        <div
+                          class="absolute bottom-0 left-0 pb-2 pl-2 rounded-b bg-dark-gradient"
+                        >
+                          <h2 class="font-bold pb-0.5 text-white">
+                            leonelakimt
+                          </h2>
+                          <ul class="flex gap-x-1">
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                            <li
+                              class="flex items-center justify-center h-5 bg-[#fe492d] rounded"
+                            >
+                              <img class="w-5" src="img/trending-white.svg" />
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- View best accounts button -->
+          <div class="absolute inset-x-0 text-center -bottom-3">
+            <a
+              href="#"
+              class="bg-white font-bold text-[#1d4ed8] py-1 px-4 border rounded-full inline-block hover:bg-gray-100"
+            >
+              view best accounts »
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- People also search for -->
+      <div class="relative pb-4 mt-5 mb-10 border-b">
+        <div class="flex">
+          <img class="w-4 mr-2" src="/img/graph.svg" alt="" />
+          <h2 class="font-bold text-gray-500 uppercase">
+            People also search for
+          </h2>
+        </div>
+
+        <div class="flex flex-wrap py-3 gap-y-2 gap-x-2 text-[#0763f7]">
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >pornstar</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >pale</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >cam-girl</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >stoner</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >milf</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >fit</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >thick</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >curvy</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >pierced</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >gamer</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >petite</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >inked</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >asian</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >cosplay</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >emo</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >redhead</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >latina</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >brunette</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >blonde</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >bdsm</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >bbw</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >big-tits</a
+          >
+          <a
+            href=""
+            class="bg-[#bfdbfe] hover:bg-[#3b82f6] hover:text-white leading-none pt-0.5 pb-1.5 px-2.5 rounded-full font-semibold"
+            >ebony</a
+          >
+        </div>
+
+        <div class="absolute inset-x-0 text-center -bottom-3">
+          <a
+            href="#"
+            class="bg-white font-bold text-[#1d4ed8] py-1 px-4 border rounded-full inline-block hover:bg-gray-100"
+          >
+            view all interests »
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="max-w-lg mx-auto sm:px-0 px-1.5">
+      <div class="p-2 mt-2 rounded bg-gray-50">
+        <p class="text-sm text-justify text-gray-500">
+          <span class="font-bold">Disclaimer:</span> Any Snapchat, Kik
+          references names, logos, brands, and any other trademarks or images
+          featured or referred to within the crushfling.com website are the
+          property of their respective trademark holders. These trademark
+          holders are not affiliated with crushfling.com. Snapchat, Kik
+          <span class="font-bold">DOES NOT</span> sponsor or endorse
+          crushfling.com.
+        </p>
+      </div>
+      <div class="p-2 text-center line-18">
+        <a class="underline" href="#">feedback / contact</a> -
+        <a class="underline" href="#">twitter</a>
+      </div>
+      <div class="pb-2 m-2 text-center">
+        ©
+        <span> 2022 crushfling.com - </span>
+        <a class="underline" href="#">Terms of Services</a>
+        -
+        <a class="underline" href="#">Privacy</a>
+        -
+        <a class="underline" href="#">DMCA</a>
+        -
+        <a class="underline" href="#">2257</a>
+      </div>
+    </footer>
+
+    <!-- JavaScript Link -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.2/dist/js/splide.min.js"></script>
+    <script src="/src/custom.js"></script>
+  </body>
+</html>
